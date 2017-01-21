@@ -1,7 +1,7 @@
 class Parser
 
-	def initialize(file)
-		@file = File.read(file)
+	def initialize(website)
+		@file = %x{curl "#{website}" }
 	end
 
 	def parse
@@ -12,6 +12,7 @@ class Parser
 		unfiltered_tags.compact.each do |tag| 
 			tags << tag.split(" ").first.gsub("/", "")
 		end
-		binding.pry
+		
+		return tags
 	end
 end
